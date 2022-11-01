@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <jsp:include page="/common/top.jsp"></jsp:include>
 	<h3>회원검색페이지</h3>
 	<table>
 		<c:forEach var="member" items="${requestScope.searchMemberlist}" varStatus="status">

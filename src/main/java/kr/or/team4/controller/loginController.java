@@ -51,7 +51,6 @@ public class loginController extends HttpServlet {
 		 // /common/login.do
 		 
 		 String viewpage="";
-
 		System.out.println("loginController 서블릿 진입...사용자가 로그인 시도 중");
     	
     	request.setCharacterEncoding("UTF-8");
@@ -60,9 +59,21 @@ public class loginController extends HttpServlet {
 		 
 		 if(urlcommand.equals("/main.do")) {
 			 
-			 viewpage="/main.jsp";
+			 viewpage="/WEB-INF/view/main.jsp";
 			 
-		 } else if(urlcommand.equals("/login.do")) {
+		 }else if(urlcommand.equals("/login.do")) {
+			 HttpSession session = request.getSession();
+			 if(session.getId() != null) {
+				 System.out.println("세션이 있습니다");
+				 System.out.println(session);
+				 System.out.println(session.getId());
+				 viewpage = "sessionTrue.do";
+			 }else {
+				 viewpage = "/WEB-INF/view/login.jsp";
+			 }
+			 
+			 
+		 }else if(urlcommand.equals("/loginok.do")) {
 				
 				String id = request.getParameter("id");
 				String pwd = request.getParameter("pwd");
@@ -74,22 +85,13 @@ public class loginController extends HttpServlet {
 				if(loginCheck == true) {//로그인 정보가 같으면
 					System.out.println("로그인 성공");
 					
-//					if(id="admin") {
-//						 viewpage = "/WEB-INF/views/register/register.jsp";
-//					}else {
-//						
-//					}
-					
-					
 					//session 생성
 					  HttpSession session = request.getSession();    //세션 객체 만들기
 		              session.setAttribute("userid", id);
-					
-
 					//loginok.jsp로 forward
 					request.setAttribute("id", id);
 					request.setAttribute("pwd", pwd);
-					viewpage = "/loginok.jsp";
+					 viewpage="/WEB-INF/view/main.jsp";
 					
 					
 				}else {
@@ -98,14 +100,28 @@ public class loginController extends HttpServlet {
 			 
 		 }else if(urlcommand.equals("/logout.do")) {
 			
-			 viewpage="logout.jsp";
+			 viewpage="/WEB-INF/view/logout.jsp";
 			 
 		 }else if(urlcommand.equals("/join.do")) {
+			 System.out.println("joinController 진입...유저가 회원가입 시도 중");
+			 //세션이 있으면 진입하지 못하도록
+			 HttpSession session = request.getSession();
+			 if(session.getId() != null) {
+				 System.out.println("세션이 있습니다");
+				 System.out.println(session);
+				 System.out.println(session.getId());
+				 viewpage = "sessionTrue.do";
+			 }else {
+				 viewpage="/WEB-INF/view/join.jsp";
+			 }
+			 
+			 
+		 }else if(urlcommand.equals("/joinok.do")) {
 			 
 			 request.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html;charset=UTF-8");
 				
-				System.out.println("joinController 진입...유저가 회원가입 시도 중");
+				
 				
 				//필드값 지정
 				String id = request.getParameter("id"); 
@@ -123,9 +139,9 @@ public class loginController extends HttpServlet {
 				if(result!=0) { //INSERT성공시
 					//뷰 지정
 					System.out.println("회원가입 성공");
-//					RequestDispatcher dispatch = request.getRequestDispatcher("/login.jsp");
+
 //					dispatch.forward(request, response);
-					viewpage = "/login.jsp";
+					viewpage = "/WEB-INF/view/login.jsp";
 				}else {
 					System.out.println("회원가입 실패");
 				}
@@ -141,7 +157,7 @@ public class loginController extends HttpServlet {
 			 
 			 //forward...
 			 //뷰에서 forEach로 테이블 출력			 
-			 viewpage = "/Admin.jsp";
+			 viewpage = "/WEB-INF/view/Admin.jsp";
 			 
 		 }else if(urlcommand.equals("/memberSearch.do")) {
 			 //search창에 입력된 회원이름값으로 LIKE검색
@@ -155,7 +171,7 @@ public class loginController extends HttpServlet {
 			request.setAttribute("searchvalue", inputValue);
 			
 			System.out.println("MemberDTO : " + searchMemberlist);
-			viewpage = "/MemberSearch.jsp";
+			viewpage = "/WEB-INF/view/MemberSearch.jsp";
 			
 		 }else if(urlcommand.equals("/memberDelete.do")) {
 			 //선택된 회원값 제거
@@ -181,20 +197,22 @@ public class loginController extends HttpServlet {
 			 //viewpage = "/Admin.jsp";
 			 
 			 //이렇게 부르면 됨
-			 viewpage = "/admin.do";
+			 viewpage = "admin.do";
 			 
 		 }else if(urlcommand.equals("/memberUpdateForm.do")) {
 			 //멤버 수정 form에 데이터를 보내주고
 			 //수정된 데이터를 받아서 처리해야하는데
 			 //이걸 서블릿 두개로 나눠서 해야할까? jsp에서 데이터를 보내주는 것보다 그게 나을까?
-			 System.out.println("memberUpdate 분기 진입");
+			 
+			 //멤버수정form에 데이터를 보내주는 서블릿
+			 System.out.println("memberUpdateForm 분기 진입");
 			 
 			 String id = request.getParameter("id");
 			 MemberListDao dao = new MemberListDao();
 			 MemberDto member = dao.getIdUser(id); //접근하려는 유저 객체
 			 
 			 request.setAttribute("member", member);
-			 viewpage = "memberUpdate.jsp";
+			 viewpage = "/WEB-INF/view/memberUpdate.jsp";
 			 
 		 }else if(urlcommand.equals("/memberUpdate.do")) {
 			 //멤버수정form에 작성된 값을 받는 부분
@@ -220,6 +238,9 @@ public class loginController extends HttpServlet {
 				 System.out.println("회원정보 수정 실패");
 			 }
 			 viewpage = "admin.do";
+			 
+		 }else if(urlcommand.equals("/sessionTrue.do")) {
+			 viewpage="/WEB-INF/view/sessionTrue.jsp";
 		 }
 		 
 		 RequestDispatcher dis = request.getRequestDispatcher(viewpage);

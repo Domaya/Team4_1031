@@ -14,7 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <jsp:include page="/common/top.jsp"></jsp:include>
 <h3>로그아웃되었습니다.</h3>
-<a href="login.jsp">로그인하기</a>
+<a href="main.do">메인으로 돌아가기</a>
 </body>
 </html>

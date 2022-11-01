@@ -24,7 +24,7 @@ td {
 </style>
 </head>
 <body>
-
+ <jsp:include page="/common/top.jsp"></jsp:include>
 				<form action="memberUpdate.do" method="post">
 					<h3 style="text-align: center;">회원정보수정</h3>
 					<div>

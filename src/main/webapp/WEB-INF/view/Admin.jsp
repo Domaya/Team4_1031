@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <jsp:include page="/common/top.jsp"></jsp:include>
 <h3>회원관리 페이지(관리자용)</h3>
 	<table>
 		<tr>
