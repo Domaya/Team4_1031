@@ -69,8 +69,8 @@ CREATE TABLE koreaMember
 </head>
 <body>
 	<table>
-
-				<form action="join.do" method="post" name="joinForm" id="joinForm">
+ <jsp:include page="/common/top.jsp"></jsp:include>
+				<form action="joinok.do" method="post" name="joinForm" id="joinForm">
 					<h3 style="text-align: center;">회원가입</h3>
 					<div>
 						<table

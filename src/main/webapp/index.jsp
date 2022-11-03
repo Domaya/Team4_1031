@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>메인페이지입니다</h3>
+
 	<script type="text/javascript">
 	location.href="main.do";
 </script>
