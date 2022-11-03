@@ -25,6 +25,7 @@ td {
 </head>
 <body>
  <jsp:include page="/common/top.jsp"></jsp:include>
+ <div class="container"  style="float: none; margin:100 auto;"></div>
 				<form action="memberUpdate.do" method="post">
 					<h3 style="text-align: center;">회원정보수정</h3>
 					<div>
@@ -54,10 +55,17 @@ td {
 							<tr>
 								<td>성별</td>
 								<td>
-									[${member.gender}] || <input type="radio" name="gender" id="gender" value="여"
-									<%if (("${member.gender}".equals("여 "))){ %>checked<%}%>>여자 
-									<input type="radio" name="gender" id="gender" value="남"
-									<%if (("${member.gender}".equals("남 "))){ %>checked<%}%>>남자
+								
+									
+									[${member.gender}]
+                             <input type="radio" name="gender" id="gender" value="여"
+                             <c:if test ="${member.gender eq '여 '}">
+                             checked
+                             </c:if>>여자
+                           <input type="radio" name="gender" id="gender" value="남"
+                           <c:if test ="${member.gender eq '남 '}">
+                             checked
+                             </c:if>>남자
 							
 
 							

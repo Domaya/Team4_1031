@@ -58,19 +58,16 @@ public class loginController extends HttpServlet {
 		 PrintWriter out = response.getWriter();
 		 
 		 if(urlcommand.equals("/main.do")) {
-			 
+			 HttpSession session = request.getSession(false);
+			 if(session != null) {
+				 request.setAttribute("session", session);
+			 }
 			 viewpage="/WEB-INF/view/main.jsp";
 			 
 		 }else if(urlcommand.equals("/login.do")) {
-			 HttpSession session = request.getSession();
-			 if(session.getId() != null) {
-				 System.out.println("세션이 있습니다");
-				 System.out.println(session);
-				 System.out.println(session.getId());
-				 viewpage = "sessionTrue.do";
-			 }else {
+			
 				 viewpage = "/WEB-INF/view/login.jsp";
-			 }
+	
 			 
 			 
 		 }else if(urlcommand.equals("/loginok.do")) {
@@ -81,6 +78,8 @@ public class loginController extends HttpServlet {
 				
 				loginDao dao = new loginDao();
 				boolean loginCheck = dao.loginCheck(id, pwd);
+				
+				System.out.println("로그인 시도 아이디 : " + id + " , 비밀번호 : " + pwd);
 				
 				if(loginCheck == true) {//로그인 정보가 같으면
 					System.out.println("로그인 성공");
@@ -104,17 +103,9 @@ public class loginController extends HttpServlet {
 			 
 		 }else if(urlcommand.equals("/join.do")) {
 			 System.out.println("joinController 진입...유저가 회원가입 시도 중");
-			 //세션이 있으면 진입하지 못하도록
-			 HttpSession session = request.getSession();
-			 if(session.getId() != null) {
-				 System.out.println("세션이 있습니다");
-				 System.out.println(session);
-				 System.out.println(session.getId());
-				 viewpage = "sessionTrue.do";
-			 }else {
+		
 				 viewpage="/WEB-INF/view/join.jsp";
-			 }
-			 
+				
 			 
 		 }else if(urlcommand.equals("/joinok.do")) {
 			 

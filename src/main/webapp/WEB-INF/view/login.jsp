@@ -9,19 +9,18 @@
 <body>
  <jsp:include page="/common/top.jsp"></jsp:include>
 
-<a href="main.do">돌아가기</a>
 
-<form class="row g-3" action="loginok.do" method="post" name="loginform">
-<div class="mb-3 col-auto">
-  <label for="ID" class="form-label">ID</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="아이디를 입력하세요">
-</div>
-<div class="mb-3 col-auto">
-  <label for="PASSWORD" class="form-label">PASSWORD</label>
-  <input type="password" class="form-control" id="exampleFormControlTextarea1"  placeholder="비밀번호를 입력하세요"></textarea>
-</div>
-	<input type="submit" value="제출">
-</form>
+	<div class="container justify-content-center" style="float: none; margin:100 auto;">
+		<form class="mt-3" action="loginok.do" method="POST" name="loginform">
 
+			  <label for="ID" class="form-label col-6">ID</label>
+			  <input type="text" class="form-control  col-6" id="id" name="id" placeholder="아이디를 입력하세요">
+			  <label for="PASSWORD" class="form-label ">PASSWORD</label>
+			  <input type="password" class="form-control col-6" id="pwd"  name="pwd" placeholder="비밀번호를 입력하세요">
+
+			  	<input type="submit" class="btn btn-outline-dark col-2 mt-3 mb-3" name="searchvalue" value="로그인">
+		</form>
+		<a href="main.do">돌아가기</a>
+	</div>
 </body>
 </html>

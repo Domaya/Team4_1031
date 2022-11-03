@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +20,19 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="main.do">Home</a>
         </li>
-        <% 
-        %>
+
+	<c:if test="${!empty sessionScope.userid}">
+	  <li class="nav-item">
+        <a class="nav-link" href="logout.do">로그아웃</a>
+	</c:if>
+	<c:if test="${empty sessionScope.userid}">
         <li class="nav-item">
         <a class="nav-link" href="join.do">회원가입</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="login.do">로그인</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-      <% %>
+      </c:if>
         
       </ul>
     </div>

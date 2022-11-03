@@ -15,7 +15,9 @@
 </head>
 <body>
  <jsp:include page="/common/top.jsp"></jsp:include>
+ <div class="container m-3">
 <h3>로그아웃되었습니다.</h3>
 <a href="main.do">메인으로 돌아가기</a>
+</div>
 </body>
 </html>

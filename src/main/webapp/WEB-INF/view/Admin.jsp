@@ -10,12 +10,15 @@
 <body>
  <jsp:include page="/common/top.jsp"></jsp:include>
 <h3>회원관리 페이지(관리자용)</h3>
-	<table>
+	<table class="table table-hover">
+	<thead>
 		<tr>
 			<th>이름</th>
 			<th>아이디</th>
 			<th>회원아이피</th>
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach var="member" items="${requestScope.memberlist}">
 		<tr>
 			<td name="${member.name}">${member.name}</td>
@@ -25,11 +28,13 @@
 			<td><a href="memberUpdateForm.do?id=${member.id}">[수정]</a></td>
 		</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<hr>
 	<form action="memberSearch.do" method="post">
-			회원명:<input type="text" name="search">
-			<input type="submit"  name="searchvalue" value="이름검색하기">
+			<label for="nameinput" class="form-label m-3">이름 검색하기</label>
+			<input type="text" class="col-xs-3" id="nameinput"  name="search">
+			<input type="submit" class="btn btn-outline-dark m-3" name="searchvalue" value="검색">
 	</form>
 </body>
 </html>
